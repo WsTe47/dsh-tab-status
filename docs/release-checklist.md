@@ -95,9 +95,10 @@ npm view @climber47/dsh-tab-status version --registry https://registry.npmjs.org
 > 复制粘贴级的完整流程在 [`market-submission.md`](./market-submission.md)，
 > PR 正文在 [`../contrib/pr-body.md`](../contrib/pr-body.md)。
 >
-> ⚠️ 那份文档的**第零节**是一次重复性尽调：注册表 1000 条里已有一条功能高度重合的
-> 收录条目（`Luaphes/dsh-web-attention-badge`）。提 PR 前请先读它，并决定是带着差异说明提，
-> 还是只发 npm 不提收录。
+> ⚠️ 那份文档的**第零节**是全量重复性尽调（注册表共 **3633** 条）：同一个细分领域
+> 至少已有 4-8 条收录条目，其中两条（`bf185003/dsh-favicon-status`、
+> `waknow/dsh-web-icon-indicator`）连「进行中」状态与动画/可配置都做了。
+> 该节的结论是**建议只发 npm、不提收录**。提 PR 前请先读它。
 
 前置条件：仓库年龄 ≥ 1 天（CI 自动查）、已打 `dsh-plugin` topic、仓库根 `package.json` 声明了 `dsh.bundle`。
 
