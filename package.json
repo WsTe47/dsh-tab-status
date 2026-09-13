@@ -38,6 +38,9 @@
     "LICENSE"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dsh": {
     "engines": {
       "dsh": ">=0.1.5-rc.1"

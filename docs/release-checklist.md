@@ -18,6 +18,7 @@
 | --- | --- |
 | 构建 | `npm run build` → `lib/client.js`，`node --check` 通过 |
 | 行为测试 | `npm test` → 20/20 通过。测试驱动的是**发布产物** `lib/client.js`，不是 `src/` |
+| 打包 | `npm pack` → `climber47-dsh-tab-status-0.1.0.tgz`（16.4 kB，11 个文件），已校验 tarball 内的 manifest 含 `dsh.bundle.patch` 与 `dsh.client.platform` |
 | `dsh.bundle` | `package.json` 同时声明 `dsh.bundle.patch` 与 `dsh.client`（只声明 `dsh.client` 无法安装，是最常见的被拒原因） |
 | 服务注入 | 只声明 `slots`；`scripts/build-client.mjs` 内有服务白名单守卫，专门防止重蹈 `dsh-step-clock@0.1.0` 的 `styles` 静默事故 |
 | 导出一致性 | 构建脚本校验每个 `exports.*` 在产物里都有真实声明，重命名模块会立刻失败 |
@@ -40,13 +41,34 @@ gh repo edit WsTe47/dsh-tab-status --add-topic dsh-plugin --description "..."
 
 结果：<https://github.com/WsTe47/dsh-tab-status>（public，topic `dsh-plugin` 已打）。
 
-### 2. 发布 npm
+### 2. 发布 npm —— ⏳ 被认证阻塞
 
-本机当前**未登录**（`npm whoami` → `ENEEDAUTH`），需要先认证：
+**现状（已实测）**：
+
+- 本机默认 registry 是 `https://registry.npmmirror.com` —— 那是**只读镜像，不能发布**。
+- `~/.npmrc` 里虽然有 `//registry.npmjs.org/:_authToken`，但该 token **已失效**：
+  `npm whoami --registry https://registry.npmjs.org/` 返回 `E401 Unauthorized`。
+  （`dsh-step-clock` 当时能发，是因为那时 token 还有效。）
+- `package.json` 已写入 `publishConfig.registry: https://registry.npmjs.org/`，
+  所以认证恢复后**不带 `--registry` 也能发对地方**，不会被本机镜像设置带偏。
+
+**恢复认证**（需要你在终端交互完成，含浏览器/OTP）：
 
 ```sh
-npm login
+npm login --registry https://registry.npmjs.org/
+```
+
+**然后发布**（两步都能发；`publishConfig` 已兜底）：
+
+```sh
+cd /Users/climber47/dsh-tab-status
 npm publish --access public
+```
+
+**发布后验收**：
+
+```sh
+npm view @climber47/dsh-tab-status version --registry https://registry.npmjs.org/
 ```
 
 要点：
@@ -69,6 +91,13 @@ npm publish --access public
 ---
 
 ## 三、+24 小时后：提收录 PR
+
+> 复制粘贴级的完整流程在 [`market-submission.md`](./market-submission.md)，
+> PR 正文在 [`../contrib/pr-body.md`](../contrib/pr-body.md)。
+>
+> ⚠️ 那份文档的**第零节**是一次重复性尽调：注册表 1000 条里已有一条功能高度重合的
+> 收录条目（`Luaphes/dsh-web-attention-badge`）。提 PR 前请先读它，并决定是带着差异说明提，
+> 还是只发 npm 不提收录。
 
 前置条件：仓库年龄 ≥ 1 天（CI 自动查）、已打 `dsh-plugin` topic、仓库根 `package.json` 声明了 `dsh.bundle`。
 
