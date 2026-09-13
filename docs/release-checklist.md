@@ -95,10 +95,11 @@ npm view @climber47/dsh-tab-status version --registry https://registry.npmjs.org
 > 复制粘贴级的完整流程在 [`market-submission.md`](./market-submission.md)，
 > PR 正文在 [`../contrib/pr-body.md`](../contrib/pr-body.md)。
 >
-> ⚠️ 那份文档的**第零节**是全量重复性尽调（注册表共 **3633** 条）：同一个细分领域
-> 至少已有 4-8 条收录条目，其中两条（`bf185003/dsh-favicon-status`、
-> `waknow/dsh-web-icon-indicator`）连「进行中」状态与动画/可配置都做了。
-> 该节的结论是**建议只发 npm、不提收录**。提 PR 前请先读它。
+> ⚠️ 那份文档的**第零节**是全量重复性尽调（注册表共 **3633** 条）：同一细分领域至少已有
+> **7** 条收录条目，其中两条（`bf185003/dsh-favicon-status`、`waknow/dsh-web-icon-indicator`）
+> 连「进行中」状态与动画/可配置都做了。
+> 最终决定是**照提，但把卖点收窄到「标签标题里可读的状态词」**，并在 PR 正文里如实承认图标侧重叠、
+> 逐一列出与那 7 条的关系。提 PR 前请先读第零节的 0.1 与 0.4。
 
 前置条件：仓库年龄 ≥ 1 天（CI 自动查）、已打 `dsh-plugin` topic、仓库根 `package.json` 声明了 `dsh.bundle`。
 

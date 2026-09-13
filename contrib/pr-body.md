@@ -2,39 +2,46 @@
 
 One file: `data/plugins/WsTe47__dsh-tab-status.yml`.
 
-`WsTe47/dsh-tab-status` keeps the browser tab in step with the WebUI workspace:
-the page title gains a state prefix with a word in it
-(`⚠ 2 待处理 · …`, `● 进行中 · …`, `✓ 2 已完成 · …`), and the tab icon becomes a
-count badge for the two states that want your attention.
+Most tab-status plugins answer "how many things need me?" with an icon. This one
+puts a **readable word** into the tab title first:
 
-It reads the session list store, the pending-interaction map and the selected
-panel through standard slot props — no host code, no polling, no RPC — and
-registers one additive entry in `shell.overlay`.
+```
+⚠ 2 待处理 · 修 tab 标题同步 — DeepSeek Harness
+● 进行中 · 修 tab 标题同步 — DeepSeek Harness
+✓ 2 已完成 · 修 tab 标题同步 — DeepSeek Harness
+```
+
+A tab clips from the right, so the leading text is the part that always survives
+truncation: the tab tells you *what* is happening, not only *that* something is.
+The three states are counted separately — waiting on you, running, finished while
+you were away — with the state word and the count both in the prefix. The tab icon
+is badged for the two states that want attention, while a running session keeps
+the factory mark.
+
+It reads the session list store, the pending-interaction store and the selected
+panel through standard slot props: no host code, no polling, no RPC.
 
 ## Relationship to existing entries
 
-`Luaphes/dsh-web-attention-badge` (already listed) also puts session state on the
-tab: an `(N)` title count and an amber/green whale tint for sessions **waiting**
-on you and sessions **finished while you were away**.
+I checked the full registry before sending this, and this surface is busy. Being
+specific about that seems more useful than pretending otherwise:
 
-The overlap is real, and I would rather flag it than have you find it later. What
-this entry covers that the existing one does not:
+| Entry | Its surface |
+| --- | --- |
+| `Luaphes/dsh-web-attention-badge` | `(N)` tab-title count, amber/green whale tint, in-frame count pills |
+| `bf185003/dsh-favicon-status` | favicon painted from the session list, spinning while work runs |
+| `waknow/dsh-web-icon-indicator` | favicon reflecting idle/running/asking/done, configurable |
+| `Pudge1996/dsh-task-feedback` | favicon status plus sound |
+| `chromoany/dsh-notify-me`, `lw-storm/dsh-plugin-noticeme`, `cookiesheep/whale-on-desk` | notifications, with a tab-title marker or flash |
 
-- **The running state.** Waiting and finished are the two states the existing
-  entry tracks; a session that is currently working has no representation there.
-  Here `● 进行中` is a first-class state with its own priority slot between the
-  two, which also makes it the state a background tab shows most of the time.
-- **A state word in the prefix, not only a count.** A tab clips from the right,
-  so `⚠ 2 待处理 · ` survives truncation where a bare `(2) ` does not. Counts are
-  per-state rather than one combined total.
-- **The badge follows the theme.** Colours are read from theme tokens and the
-  badge is repainted on `theme/change`.
+What is different here is narrow, and I would rather state it narrowly than
+oversell it: **the title carries a word**. None of the entries above put a readable
+state name in the title — the title side is either a bare count or a marker that
+appears only when something is pending.
 
-To be equally clear about the other direction: the existing entry also draws
-count pills inside the app frame, which this plugin does not.
-
-If you judge the overlap to be too close for a second entry, close this without
-merging — that is a fair call and I would rather it be yours than mine.
+The icon side, by contrast, genuinely overlaps with the entries above. If the tab
+icon were the whole story I would not be sending this. And if you read the overlap
+as too close anyway, close this without merging — that is a fair call.
 
 ## Checks
 
@@ -44,8 +51,9 @@ merging — that is a fair call and I would rather it be yours than mine.
 | Repository declares `dsh.bundle` | ✅ `dsh.bundle.patch` + `dsh.client` (platform `web`) |
 | Repository age ≥ 1 day | repo created 2026-09-13 |
 | `dsh-plugin` topic | ✅ |
-| Description is functional, not marketing, and true to the code | ✅ states, counts (`9+` cap) and the `shell.overlay` seat all match `src/` |
+| Description is functional, not marketing, and true to the code | ✅ the three states, the per-state counts and the `9+` cap all match `src/` |
 | Bilingual description | ✅ `description.en` + `description.zh`, both ending with a period |
 
-Published on npm as [`@climber47/dsh-tab-status`](https://www.npmjs.com/package/@climber47/dsh-tab-status);
-the package's `repository` field points back at the repository being listed.
+The package is published on npm as
+[`@climber47/dsh-tab-status`](https://www.npmjs.com/package/@climber47/dsh-tab-status),
+and its `repository` field points back at the repository being listed.
