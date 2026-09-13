@@ -1,0 +1,21 @@
+# 提交到 awesome-dsh-plugin 用（这是要开 PR 的那个文件，不是本仓库的一部分）
+#
+# 放到目标仓库的这个路径下（文件名必须严格是 <owner>__<repo>.yml）：
+#   data/plugins/WsTe47__dsh-tab-status.yml
+#
+# 目录 <category> 取值必须是下面之一：
+#   agi ui usage theme model identity session memory tools wsl browser
+#   vision voice docs skill workflow git notify dev security remote market fun
+#
+# 注意事项（来自 contributing.md）：
+#   1. url 必须与仓库地址完全一致。
+#   2. 只有 description.en 是必填；zh 可选，缺了维护者会补。
+#   3. 描述里若出现「: 」（半角冒号+空格）必须整体加引号，否则 YAML 会解析错。
+#   4. PR 只加这一个文件，不要动 README（README 是脚本生成的）。
+#   5. 仓库需创建满 1 天，CI 自动检查。
+url: https://github.com/WsTe47/dsh-tab-status
+name: WsTe47/dsh-tab-status
+category: ui
+description:
+  en: Shows the workspace's session progress on the browser tab. The page title gains a state prefix (waiting on you, running, or finished while you were elsewhere) and the tab icon becomes a count badge for the two states that want your attention.
+  zh: 把工作区的会话进度显示在浏览器标签上。页签标题前面会加一句状态（待处理 / 进行中 / 已完成未查看），页签图标在其中两种状态下换成带数字的徽章。

@@ -1,0 +1,67 @@
+{
+  "name": "@climber47/dsh-tab-status",
+  "version": "0.1.0",
+  "description": "Keeps the browser tab in step with the DeepSeek Harness workspace: a status prefix on the page title and a count badge on the favicon, for sessions that are running, that finished while you were elsewhere, or that are waiting on your answer.",
+  "keywords": [
+    "deepseek",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "ui"
+  ],
+  "type": "module",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node scripts/build-client.mjs && node --test \"tests/**/*.mjs\""
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "src",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.1.5-rc.1"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ],
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WsTe47/dsh-tab-status.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WsTe47/dsh-tab-status/issues"
+  },
+  "homepage": "https://github.com/WsTe47/dsh-tab-status#readme",
+  "author": "climber47"
+}
