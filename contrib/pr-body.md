@@ -17,20 +17,21 @@ registers one additive entry in `shell.overlay`.
 tab: an `(N)` title count and an amber/green whale tint for sessions **waiting**
 on you and sessions **finished while you were away**.
 
-The overlap is real, and I would rather flag it than have you find it later. The
-differences are:
+The overlap is real, and I would rather flag it than have you find it later. What
+this entry covers that the existing one does not:
 
-- **It also covers the running state.** Waiting and finished are the two states
-  the existing entry tracks; a session that is currently working has no
-  representation there. Here `● 进行中` is a first-class state, with its own
-  priority slot between waiting and finished.
-- **The prefix carries a word, not just a count.** A tab clips from the right,
-  so a three-character state word survives truncation where a bare `(2)` does not.
-- **Prominence is graded.** Waiting/finished take over the whole icon as a
-  numbered disc; running keeps the factory mark and only gains a status dot,
-  because it is the high-frequency case.
-- To be equally clear about the other direction: the existing entry also draws a
-  badge inside the frame, which this plugin does not.
+- **The running state.** Waiting and finished are the two states the existing
+  entry tracks; a session that is currently working has no representation there.
+  Here `● 进行中` is a first-class state with its own priority slot between the
+  two, which also makes it the state a background tab shows most of the time.
+- **A state word in the prefix, not only a count.** A tab clips from the right,
+  so `⚠ 2 待处理 · ` survives truncation where a bare `(2) ` does not. Counts are
+  per-state rather than one combined total.
+- **The badge follows the theme.** Colours are read from theme tokens and the
+  badge is repainted on `theme/change`.
+
+To be equally clear about the other direction: the existing entry also draws
+count pills inside the app frame, which this plugin does not.
 
 If you judge the overlap to be too close for a second entry, close this without
 merging — that is a fair call and I would rather it be yours than mine.
