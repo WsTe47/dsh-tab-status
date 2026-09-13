@@ -1,9 +1,14 @@
 # 发布准备清单 — `@climber47/dsh-tab-status`
 
-> **当前状态：本地已就绪，外部动作（建仓库 / 发 npm / 提 PR）待执行。**
+> **当前状态：仓库已建好并推送，24 小时计时已开始；发 npm 与提收录 PR 待执行。**
 >
-> 时间约束来自收录 CI 的硬性要求：**仓库创建满 1 天**。所以那 24 小时是从
-> 「建 GitHub 仓库」那一刻开始计时的 —— 这一步越早做，越早能提收录 PR。
+> 时间约束来自收录 CI 的硬性要求：**仓库创建满 1 天**（`contrib/` 里那条注释同样写了）。
+> 那 24 小时从「建 GitHub 仓库」那一刻开始计时，不是从发 npm 开始。
+>
+> | 里程碑 | 本地 CST | UTC |
+> | --- | --- | --- |
+> | 仓库创建（计时起点） | 2026-09-13 22:39 | 2026-09-13 14:39 |
+> | **最早可以提收录 PR** | **2026-09-14 22:39** | **2026-09-14 14:39** |
 
 ---
 
@@ -24,16 +29,16 @@
 
 ## 二、现在就能做（需要你的账号动作）
 
-### 1. 建仓库并推上去 —— 24 小时从这里开始算
+### 1. 建仓库并推上去 —— ✅ 已完成（2026-09-13 22:39 CST，24 小时从这里开始算）
+
+已执行：
 
 ```sh
 gh repo create WsTe47/dsh-tab-status --public --source=. --remote=origin --push
-gh repo edit WsTe47/dsh-tab-status \
-  --add-topic dsh-plugin \
-  --description "把 DeepSeek Harness 网页版的会话进度同步到浏览器标签：标题状态前缀 + favicon 计数徽章。"
+gh repo edit WsTe47/dsh-tab-status --add-topic dsh-plugin --description "..."
 ```
 
-要点：`dsh-plugin` topic 是收录硬性要求之一。
+结果：<https://github.com/WsTe47/dsh-tab-status>（public，topic `dsh-plugin` 已打）。
 
 ### 2. 发布 npm
 
